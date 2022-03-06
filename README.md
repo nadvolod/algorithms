@@ -97,3 +97,47 @@ public static string CaesarCypherEncryptor(string str, int key) {
 	return newStr;
 }
 ```
+
+### Solution B
+
+What if we didn't want to use the `char` cast? Well we could create an array of values ourselves like this
+
+```c#
+var letterDictionary = new Dictionary<char letter, int index>();
+letterDictionary.Add('a', 0);
+letterDictionary.Add('b', 1);
+...
+letterDictionary.Add('z', 25);
+```
+
+Hence, we'd need to update our algorithm a bit to look like this
+
+ℹ️ Let's revisit this implementation in the future as it's not fully finished
+
+```c#
+public static string getShiftedValue(char character, int key)
+{
+	int incrementedChar = letterDictionary[character] + key;
+	if(incrementedChar <= 25)
+		return letterDictionary[character].ToString();
+	else
+		return letterDictionary[character % 26].ToString();
+}
+
+public static string CaesarCypherEncryptor(string str, int key) {
+	// Write your code here.
+	string newStr="";
+	key = key % 26;
+	var charArray = str.ToCharArray();
+	foreach(var character in charArray){
+		newStr += getShiftedValue(character, key);
+	}
+	return newStr;
+}
+```
+
+Time= O(n) where n is the length of the string
+
+Space= O(n) 
+
+With an alphabet, our length is only 26. If our alphabet size changed, then we would have an O(m).
