@@ -2,6 +2,8 @@
 
 ## prompt
 
+![prompt](./images/bst-construction-prompt.png)
+
 ## important notes
 
 * Can't remove values from a single-node tree, `remove` does nothing
